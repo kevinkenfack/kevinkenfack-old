@@ -1,36 +1,51 @@
-import { Inter, Roboto_Mono } from 'next/font/google'
-import "./globals.css"
-import Navbar from "./components/Navbar"
+import "styles/globals.css"
+import "react-toastify/dist/ReactToastify.css"
+import "prismjs/themes/prism-tomorrow.css"
+import "animate.css"
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
+import Footer from "@/components/footer/Footer"
+import LetWorkTogether from "@/components/cta/LetWorkTogether"
+import NavBar from "@/components/navbar/NavBar"
 
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-})
+import { Raleway } from "next/font/google"
+const raleway = Raleway({ subsets: ["latin"] })
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
-        <div className="relative min-h-screen">
-          <Navbar />
-          <main className="relative z-10">
+    <>
+      <html
+        lang="en"
+        className={`text-[14px] scroll-smooth ${raleway.className}`}
+      >
+        <head>
+          <meta charSet="utf-8" />
+          <link rel="icon" type="image/png" href="/logo.png" />
+          <link rel="apple-touch-icon" href="/fav.png" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `try {if ((localStorage.theme) && (localStorage.theme === 'light')) {document.documentElement.classList.add('light')} else {document.documentElement.classList.add('dark')}} catch (__) {}`,
+            }}
+          ></script>
+        </head>
+
+        <body className="w-screen h-screen overflow-x-hidden font-medium text-white selection:bg-colorBgLight selection:text-colorPrimary bg-white dark:bg-colorBg_DM transition-all duration-300 ease-out">
+          <NavBar />
+          <main className="relative w-full mt-52 sm:w-[92%] md:w-[80%] lg:w-[640px] m-auto pb-40">
             {children}
+            <LetWorkTogether />
+            <Footer />
           </main>
-          
-          {/* Gradient effects */}
-          <div className="fixed top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-purple-500/20 via-transparent to-transparent opacity-30 pointer-events-none" />
-          <div className="fixed bottom-0 left-0 right-0 h-[500px] bg-gradient-to-t from-blue-500/20 via-transparent to-transparent opacity-30 pointer-events-none" />
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </>
   )
 }
