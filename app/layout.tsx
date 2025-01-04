@@ -38,6 +38,9 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         </head>
 
         <body className="w-screen h-screen overflow-x-hidden font-medium text-white selection:bg-colorBgLight selection:text-colorPrimary bg-white dark:bg-colorBg_DM transition-all duration-300 ease-out">
+          <div className="noise-overlay" />
+          <div className="hidden md:block bg-gradiant overflow-hidden" />
+          
           <NavBar />
           <main className="relative w-full mt-52 sm:w-[92%] md:w-[80%] lg:w-[640px] m-auto pb-40">
             {children}
